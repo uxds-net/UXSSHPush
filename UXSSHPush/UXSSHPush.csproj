@@ -10,6 +10,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/uxds-net/UXSSHPush</PackageProjectUrl>
+    <Description>Deploying via SSH</Description>
+    <RepositoryUrl>https://github.com/uxds-net/UXSSHPush.git</RepositoryUrl>
+    <PackageTags>ssh deploy</PackageTags>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
+    <Company>UXDS.net</Company>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Properties\**" />

@@ -60,7 +60,6 @@ namespace UXSSHPush
             Console.WriteLine("");
             Console.WriteLine("Notice:");
             Console.WriteLine("Be sure not commiting configfiles due containing credentials");
-            Console.WriteLine("RemoteDir must exist.");
         }
         static bool CreateSample(CommandlineOptions Options)
         {
@@ -76,7 +75,7 @@ namespace UXSSHPush
                 PrivateKeyFile = null,
                 PreCommand = new List<string> { "precommand1", "precommand2" },
                 PostCommand = new List<string> { "postcommand1", "postcommand2" },
-                Excludefiles = new List<string> { "appsettings.json", ".txt" }
+                Excludefiles = new List<string> { "appsettings.json", "*.txt" }
             };
 
             try
@@ -147,19 +146,40 @@ namespace UXSSHPush
                                 Console.WriteLine("Remotepath:     " + sSHOptions.Remotepath);
                                 Console.WriteLine("Localpath:      " + sSHOptions.Localpath);
                                 Console.WriteLine("Excluded file pattern:");
-                                foreach (string excluded in sSHOptions.Excludefiles)
+                                if (sSHOptions.Excludefiles != null)
                                 {
-                                    Console.WriteLine("  " + excluded);
+                                    foreach (string excluded in sSHOptions.Excludefiles)
+                                    {
+                                        Console.WriteLine("  " + excluded);
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("no files excluded");
                                 }
                                 Console.WriteLine("Pre Commands:");
-                                foreach (string pre in sSHOptions.PreCommand)
+                                if (sSHOptions.PreCommand != null)
                                 {
-                                    Console.WriteLine("  " + pre);
+                                    foreach (string pre in sSHOptions.PreCommand)
+                                    {
+                                        Console.WriteLine("  " + pre);
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("no pre commands");
                                 }
                                 Console.WriteLine("Post Commands:");
-                                foreach (string post in sSHOptions.PostCommand)
+                                if (sSHOptions.PostCommand != null)
                                 {
-                                    Console.WriteLine("  " + post);
+                                    foreach (string post in sSHOptions.PostCommand)
+                                    {
+                                        Console.WriteLine("  " + post);
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("no post commands");
                                 }
                             }
                         }

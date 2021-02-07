@@ -34,7 +34,7 @@ UXSSHPush --config="C:\MyRepo\MyConfig.json" --create
         ],
        "Excludefiles": [
            "appsettings.json",
-           ".txt"
+           "*.txt"
        ]
     }
 
