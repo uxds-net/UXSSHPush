@@ -64,20 +64,23 @@ namespace UXSSHPush
         }
         private bool ExcludedFile(string filename)
         {
-            foreach (string excl in options.Excludefiles)
+            if (options.Excludefiles != null)
             {
-                if (excl.StartsWith('*'))
+                foreach (string excl in options.Excludefiles)
                 {
-                    if (filename.EndsWith(excl[1..], StringComparison.OrdinalIgnoreCase))
+                    if (excl.StartsWith('*'))
                     {
-                        return true;
+                        if (filename.EndsWith(excl[1..], StringComparison.OrdinalIgnoreCase))
+                        {
+                            return true;
+                        }
                     }
-                }
-                else
-                {
-                    if (filename.Equals(excl, StringComparison.OrdinalIgnoreCase))
+                    else
                     {
-                        return true;
+                        if (filename.Equals(excl, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -85,29 +88,36 @@ namespace UXSSHPush
         }
         public void PreCommands()
         {
-            sshclient.Connect();
-            Console.WriteLine("Processing Pre Commands");
-            foreach (string pre in options.PreCommand)
+            if (options.PreCommand != null)
             {
-                using (SshCommand cmd = sshclient.RunCommand(pre))
+                sshclient.Connect();
+
+                Console.WriteLine("Processing Pre Commands");
+                foreach (string pre in options.PreCommand)
                 {
-                    VerboseLog(cmd.Result);
+                    using (SshCommand cmd = sshclient.RunCommand(pre))
+                    {
+                        VerboseLog(cmd.Result);
+                    }
                 }
+                sshclient.Disconnect();
             }
-            sshclient.Disconnect();
         }
         public void PostCommands()
         {
-            sshclient.Connect();
-            Console.WriteLine("Processing Post Commands");
-            foreach (string post in options.PostCommand)
+            if (options.PostCommand != null)
             {
-                using (SshCommand cmd = sshclient.RunCommand(post))
+                sshclient.Connect();
+                Console.WriteLine("Processing Post Commands");
+                foreach (string post in options.PostCommand)
                 {
-                    VerboseLog(cmd.Result);
+                    using (SshCommand cmd = sshclient.RunCommand(post))
+                    {
+                        VerboseLog(cmd.Result);
+                    }
                 }
+                sshclient.Disconnect();
             }
-            sshclient.Disconnect();
         }
 
         public void ProcessFiles()
